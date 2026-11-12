@@ -1,0 +1,7 @@
+Keys
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+.idea/
