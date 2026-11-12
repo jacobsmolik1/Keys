@@ -43,6 +43,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
     implementation("androidx.lifecycle:lifecycle-service:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime:2.7.0")
     implementation("androidx.core:core-ktx:1.13.0")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.savedstate:savedstate:1.2.1")

@@ -64,6 +64,7 @@ class KeyboardService : InputMethodService(), LifecycleOwner {
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
             inputView = ComposeView(this).apply {
                 setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool)
+                setViewTreeLifecycleOwnerReflect(this, this@KeyboardService)
                 setContent {
                     CompositionLocalProvider(LocalLifecycleOwner provides this@KeyboardService) {
                         val state = uiState
@@ -247,5 +248,13 @@ class KeyboardService : InputMethodService(), LifecycleOwner {
             autocorrectEnabled = prefs.getBoolean("autocorrect", true),
             showNumberRow = prefs.getBoolean("number_row", true),
         )
+    }
+
+    private fun setViewTreeLifecycleOwnerReflect(view: android.view.View, owner: LifecycleOwner) {
+        try {
+            Class.forName("androidx.lifecycle.ViewTreeLifecycleOwner")
+                .getMethod("set", android.view.View::class.java, LifecycleOwner::class.java)
+                .invoke(null, view, owner)
+        } catch (_: Exception) {}
     }
 }
